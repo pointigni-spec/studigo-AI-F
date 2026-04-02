@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>Studigo AI</title>
+<style>
+body {
+    font-family: Arial;
+    background: #1e3c72;
+    color: white;
+    text-align: center;
+}
+
+#chatbox {
+    width: 90%;
+    max-width: 500px;
+    margin: auto;
+    background: white;
+    color: black;
+    border-radius: 10px;
+    padding: 10px;
+    height: 300px;
+    overflow-y: auto;
+}
+
+input {
+    width: 60%;
+    padding: 10px;
+}
+
+button {
+    padding: 10px;
+    background: orange;
+    border: none;
+    cursor: pointer;
+}
+
+.message {
+    margin: 10px;
+    text-align: left;
+}
+</style>
+</head>
+
+<body>
+
+<h1>🤖 Studigo AI</h1>
+
+<div id="chatbox"></div>
+
+<br>
+
+<input id="userInput" placeholder="Ask something...">
+<button onclick="sendMessage()">Send</button>
+
+<script>
+function sendMessage() {
+    let input = document.getElementById("userInput");
+    let chatbox = document.getElementById("chatbox");
+
+    let userText = input.value;
+
+    if(userText.trim() === "") return;
+
+    chatbox.innerHTML += "<div class='message'><b>You:</b> " + userText + "</div>";
+
+    let reply = getAIResponse(userText);
+
+    chatbox.innerHTML += "<div class='message'><b>Studigo AI:</b> " + reply + "</div>";
+
+    input.value = "";
+    chatbox.scrollTop = chatbox.scrollHeight;
+}
+
+function getAIResponse(input) {
+    input = input.toLowerCase();
+
+    if(input.includes("math")) return "Break the problem step by step.";
+    if(input.includes("notes")) return "I can help you create short notes!";
+    if(input.includes("science")) return "Tell me the topic in science!";
+    if(input.includes("hello")) return "Hello! How can I help you?";
+
+    return "Ask me anything related to studies!";
+}
+</script>
+
+</body>
+</html>
